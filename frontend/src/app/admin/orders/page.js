@@ -3,16 +3,27 @@ export default function AdminOrdersPage() {
     {
       id: "ORD-1001",
       customer: "John Doe",
-      total: 4500,
+      date: "2015-11-16",
       status: "Pending",
     },
     {
       id: "ORD-1002",
       customer: "Alex Silva",
-      total: 7800,
+      date: "2015-11-13",
       status: "Completed",
     },
   ];
+
+  // A helper to style the status
+  const getStatusClasses = (status) => {
+    if (status === "Pending") {
+      return "bg-yellow-200 text-yellow-800 font-semibold px-3 py-1 rounded";
+    }
+    if (status === "Completed") {
+      return "bg-green-200 text-green-800 font-semibold px-3 py-1 rounded";
+    }
+    return "";
+  };
 
   return (
     <div className="p-6">
@@ -24,9 +35,8 @@ export default function AdminOrdersPage() {
             <tr className="bg-gray-200">
               <th className="border p-2">Order ID</th>
               <th className="border p-2">Customer</th>
-              <th className="border p-2">Total (Rs)</th>
+              <th className="border p-2">Date</th>
               <th className="border p-2">Status</th>
-              <th className="border p-2">Actions</th>
             </tr>
           </thead>
 
@@ -35,15 +45,11 @@ export default function AdminOrdersPage() {
               <tr key={order.id} className="text-center">
                 <td className="border p-2">{order.id}</td>
                 <td className="border p-2">{order.customer}</td>
-                <td className="border p-2">Rs {order.total}</td>
-                <td className="border p-2">{order.status}</td>
+                <td className="border p-2">{order.date}</td>
                 <td className="border p-2">
-                  <button className="px-4 py-1 bg-green-600 text-white rounded mr-2">
-                    View
-                  </button>
-                  <button className="px-4 py-1 bg-yellow-600 text-white rounded">
-                    Update
-                  </button>
+                  <span className={getStatusClasses(order.status)}>
+                    {order.status}
+                  </span>
                 </td>
               </tr>
             ))}
