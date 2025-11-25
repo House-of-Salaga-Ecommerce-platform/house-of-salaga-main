@@ -29,10 +29,13 @@ export default function AdminShell({ children }) {
   return (
     <div className="flex min-h-screen bg-zinc-100">
       {/* SIDEBAR */}
-      <aside className="w-64 bg-white border-r shadow-sm hidden md:flex flex-col">
-        <div className="p-6 border-b">
-          <h1 className="text-xl font-bold tracking-tight">
-            House of Salaga<span className="text-primary"> Admin</span>
+      <aside className="w-64 hidden md:flex flex-col 
+        bg-gradient-to-b from-[#0b1b33] to-[#071426] 
+        text-white shadow-lg"
+      >
+        <div className="p-6 border-b border-white/10">
+          <h1 className="text-xl font-bold tracking-tight text-amber-400">
+            House of Salaga <span className="text-white">Admin</span>
           </h1>
         </div>
 
@@ -49,8 +52,8 @@ export default function AdminShell({ children }) {
                   transition-all 
                   ${
                     active
-                      ? "bg-primary text-white shadow"
-                      : "text-zinc-700 hover:bg-zinc-200"
+                      ? "bg-white/10 text-white shadow"
+                      : "text-gray-300 hover:bg-white/5"
                   }`}
               >
                 <Icon size={18} />
@@ -60,8 +63,16 @@ export default function AdminShell({ children }) {
           })}
         </nav>
 
-        <div className="p-4 border-t">
-          <Button variant="outline" className="w-full flex items-center gap-2">
+        <div className="p-4 border-t border-white/10">
+          <Button
+            variant="ghost"
+            className="w-full flex items-center gap-2 
+              border border-white/30 
+              text-white 
+              bg-transparent
+              hover:bg-white/10
+              hover:border-white/50"
+          >
             <LogOut size={18} />
             Logout
           </Button>
