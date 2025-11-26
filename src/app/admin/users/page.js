@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function AdminUsersPage() {
   const users = [
     { id: 1, name: "John Doe", email: "john@gmail.com", role: "User" },
@@ -31,7 +29,10 @@ export default function AdminUsersPage() {
                 <td className="border p-2">{user.role}</td>
                 <td className="border p-2">
                   <button className="px-4 py-1 bg-blue-600 text-white rounded mr-2">
-                    <Link href={`/admin/users/${user.id}`}>Details</Link>
+                    Edit
+                  </button>
+                  <button className="px-4 py-1 bg-red-600 text-white rounded">
+                    Delete
                   </button>
                 </td>
               </tr>

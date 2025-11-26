@@ -59,9 +59,7 @@ export default function AdminDashboard() {
             <CardTitle>Sales Overview</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Sales chart coming soon...
-            </p>
+            <p className="text-sm text-muted-foreground">Sales chart coming soon...</p>
           </CardContent>
         </Card>
 
@@ -70,9 +68,7 @@ export default function AdminDashboard() {
             <CardTitle>Recent Orders</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Recent orders table coming soon...
-            </p>
+            <p className="text-sm text-muted-foreground">Recent orders table coming soon...</p>
           </CardContent>
         </Card>
       </div>
