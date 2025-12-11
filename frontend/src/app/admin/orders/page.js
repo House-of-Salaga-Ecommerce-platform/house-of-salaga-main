@@ -1,27 +1,20 @@
-export default function AdminOrdersPage() {
-  const orders = [
-    {
-      id: "ORD-1001",
-      customer: "John Doe",
-      date: "2015-11-16",
-      status: "Pending",
-    },
-    {
-      id: "ORD-1002",
-      customer: "Alex Silva",
-      date: "2015-11-13",
-      status: "Completed",
-    },
-  ];
+// src/app/admin/orders/page.js
+import { API_BASE_URL } from "@/src/lib/apiClient";
 
-  // A helper to style the status
+export default async function AdminOrdersPage() {
+  // Fetch through Next.js API route, which proxies to backend
+  const res = await fetch(`${API_BASE_URL}/orders`, {
+    cache: "no-store", // ensures fresh data
+  });
+
+  const data = await res.json();
+  const orders = data.orders || [];
+
   const getStatusClasses = (status) => {
-    if (status === "Pending") {
+    if (status === "pending")
       return "bg-yellow-200 text-yellow-800 font-semibold px-3 py-1 rounded";
-    }
-    if (status === "Completed") {
+    if (status === "completed")
       return "bg-green-200 text-green-800 font-semibold px-3 py-1 rounded";
-    }
     return "";
   };
 
@@ -44,8 +37,10 @@ export default function AdminOrdersPage() {
             {orders.map((order) => (
               <tr key={order.id} className="text-center">
                 <td className="border p-2">{order.id}</td>
-                <td className="border p-2">{order.customer}</td>
-                <td className="border p-2">{order.date}</td>
+                <td className="border p-2">{order.user?.name}</td>
+                <td className="border p-2">
+                  {new Date(order.createdAt).toLocaleDateString()}
+                </td>
                 <td className="border p-2">
                   <span className={getStatusClasses(order.status)}>
                     {order.status}
@@ -53,6 +48,13 @@ export default function AdminOrdersPage() {
                 </td>
               </tr>
             ))}
+            {orders.length === 0 && (
+              <tr>
+                <td colSpan="4" className="p-4 text-gray-500 text-center">
+                  No orders available.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
