@@ -1,10 +1,15 @@
+// src/app/admin/users/page.js
 import Link from "next/link";
+import { API_BASE_URL } from "@/src/lib/apiClient";
 
-export default function AdminUsersPage() {
-  const users = [
-    { id: 1, name: "John Doe", email: "john@gmail.com", role: "User" },
-    { id: 2, name: "Admin User", email: "admin@gmail.com", role: "Admin" },
-  ];
+export default async function AdminUsersPage() {
+  // Fetch users
+  const res = await fetch(`${API_BASE_URL}/admin/users`, {
+    cache: "no-store",
+  });
+
+  const data = await res.json();
+  const users = data.users || [];
 
   return (
     <div className="p-6">
@@ -28,14 +33,25 @@ export default function AdminUsersPage() {
                 <td className="border p-2">{user.id}</td>
                 <td className="border p-2">{user.name}</td>
                 <td className="border p-2">{user.email}</td>
-                <td className="border p-2">{user.role}</td>
+                <td className="border p-2 capitalize">{user.role}</td>
                 <td className="border p-2">
-                  <button className="px-4 py-1 bg-blue-600 text-white rounded mr-2">
-                    <Link href={`/admin/users/${user.id}`}>Details</Link>
-                  </button>
+                  <Link
+                    href={`/admin/users/${user.id}`}
+                    className="px-4 py-1 bg-blue-600 text-white rounded"
+                  >
+                    Details
+                  </Link>
                 </td>
               </tr>
             ))}
+
+            {users.length === 0 && (
+              <tr>
+                <td colSpan="5" className="p-4 text-gray-500 text-center">
+                  No users found.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
